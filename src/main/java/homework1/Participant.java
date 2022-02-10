@@ -8,9 +8,14 @@ class Participant extends Team {
     private Sex sex;
     private int age;
 
-    public Participant(String name, Sex sex, int age) {
+    Participant(String name, Sex sex, int age) {
         this.name = name;
         this.sex = sex;
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name;
     }
 }
