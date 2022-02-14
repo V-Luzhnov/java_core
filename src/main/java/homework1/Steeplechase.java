@@ -14,8 +14,8 @@ public class Steeplechase {
         final String Q_KG = " kg";
 
         Course course = new Course();
-        course.setDistance(5000);
-        course.setBridgeLiftingCapacity(100);
+        course.setDistance(5000); //длина дистанции
+        course.setBridgeLiftingCapacity(100); //грузоподъемность моста на дистанции
 //        course.setDistance(7000);
 //        course.setBridgeLiftingCapacity(60);
 
@@ -26,6 +26,7 @@ public class Steeplechase {
         team.setNameTeam("Rocket");
         team.setYearOfCreation(2020);
 
+        //Участники = Имя | Пол | Возраст | Вес | Может пробежать |
         Participant[] participants = {
                 new Participant("Ivan", Sex.male, 27, 80, 10000),
                 new Participant("Kate", Sex.female, 20, 50, 5000),

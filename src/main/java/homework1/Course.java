@@ -8,6 +8,8 @@ package homework1;
 class Course {
 
     final String Q_PARTICIPANT = "Participant ";
+    final String Q_DID_NOT_RAN = " did not ran the obstacle course.";
+    final String Q_RAN = " ran the obstacle course.";
 
     private int distance;
     private int bridgeLiftingCapacity;
@@ -40,10 +42,10 @@ class Course {
     public void doIt(Team team) {
         for (Participant participant : team.getParticipant()) {
             if (participant.getCanRun() < this.distance || participant.getWeight() > this.bridgeLiftingCapacity) {
-                System.out.println(Q_PARTICIPANT + participant.getName() + " did not ran the obstacle course");
+                System.out.println(Q_PARTICIPANT + participant.getName() + Q_DID_NOT_RAN);
                 team.setResults(false);
             } else{
-                System.out.println(Q_PARTICIPANT + participant.getName() + " ran the obstacle course");
+                System.out.println(Q_PARTICIPANT + participant.getName() + Q_RAN);
             }
         }
     }
