@@ -48,26 +48,6 @@ class Participant extends Team {
         return canRun;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = sex;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public void setCanRun(int canRun) {
-        this.canRun = canRun;
-    }
-
     @Override
     public String toString() {
         return name + " (sex: " + sex + ", age: " + age + ", weight: " + weight + ", can run: " + canRun + ")";
