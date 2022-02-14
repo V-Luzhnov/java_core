@@ -6,6 +6,9 @@ package homework1;
  * @version 14.02.2022
  */
 class Course {
+
+    final String Q_PARTICIPANT = "Participant ";
+
     private int distance;
     private int bridgeLiftingCapacity;
 
@@ -37,10 +40,10 @@ class Course {
     public void doIt(Team team) {
         for (Participant participant : team.getParticipant()) {
             if (participant.getCanRun() < this.distance || participant.getWeight() > this.bridgeLiftingCapacity) {
-                System.out.println("Participant " + participant.getName() + " did not ran the obstacle course");
+                System.out.println(Q_PARTICIPANT + participant.getName() + " did not ran the obstacle course");
                 team.setResults(false);
             } else{
-                System.out.println("Participant " + participant.getName() + " ran the obstacle course");
+                System.out.println(Q_PARTICIPANT + participant.getName() + " ran the obstacle course");
             }
         }
     }
