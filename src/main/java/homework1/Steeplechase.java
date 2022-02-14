@@ -5,17 +5,18 @@ import homework1.enums.Sex;
 public class Steeplechase {
     public static void main(String[] args) {
 
-        Course Course = new Course();
-        Course.setDistance(5000);
-        Course.setMaxObstacleHeight(200);
-        Course.setNumberOfObstacles(10);
+        Course course = new Course();
+        course.setDistance(5000);
+        course.setBridgeLiftingCapacity(100);
+//        course.setDistance(7000);
+//        course.setBridgeLiftingCapacity(60);
 
         System.out.println();
-        System.out.println("Distance: " + Course.getDistance() + " m | Number of obstacles: " + Course.getNumberOfObstacles());
+        System.out.println("Distance: " + course.getDistance() + " m | Bridge lifting capacity: " + course.getBridgeLiftingCapacity());
 
-        Team Team = new Team();
-        Team.setNameTeam("Rocket");
-        Team.setYearOfCreation(2020);
+        Team team = new Team();
+        team.setNameTeam("Rocket");
+        team.setYearOfCreation(2020);
 
         Participant[] participants = {
                 new Participant("Ivan", Sex.male, 27, 80, 10000),
@@ -24,30 +25,27 @@ public class Steeplechase {
                 new Participant("Juli", Sex.female, 34, 55, 10000)
         };
 
-        Team.setParticipants(participants);
-        Team.setNumberOfParticipants(Participant.getCountOfParticipant());
+        team.setParticipants(participants);
+        team.setNumberOfParticipants(Participant.getCountOfParticipant());
 
-//        System.out.println();
-        System.out.println("Team: " + Team.getNameTeam() +
-                " | Year of formation: " + Team.getYearOfCreation() +
-                " | Number of participants: " + Team.getNumberOfParticipants());
+        System.out.println();
 
-//        System.out.println();
+        System.out.println("Team: " + team.getNameTeam() +
+                " | Year of formation: " + team.getYearOfCreation() +
+                " | Number of participants: " + team.getNumberOfParticipants());
 
         int numberParticipant= 1;
-        for (Participant participant : Team.getParticipant()) {
+        for (Participant participant : team.getParticipant()) {
             System.out.println("Participant " + numberParticipant + ": " + participant.toString());
-//            System.out.println("weight: " + participant.getName());
             numberParticipant++;
         }
 
-//        Course Course = new Course();
-//        Course.setDistance(1000);
+        System.out.println();
 
-//        System.out.println();
-//        System.out.println("Course: " + Course.getDistance());
+        course.doIt(team);
 
-//        System.out.println(Team.run(150, 5));
+        System.out.println();
 
+        team.showResults();
     }
 }

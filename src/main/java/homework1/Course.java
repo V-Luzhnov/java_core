@@ -2,14 +2,12 @@ package homework1;
 
 class Course {
     private int distance;
-    private int maxObstacleHeight;
-    private int numberOfObstacles;
+    private int bridgeLiftingCapacity;
 
-    Course(int distance, int maxObstacleHeight, int numberOfObstacles) {
+    Course(int distance, int bridgeLiftingCapacity) {
 
         this.distance = distance;
-        this.maxObstacleHeight = maxObstacleHeight;
-        this.numberOfObstacles = numberOfObstacles;
+        this.bridgeLiftingCapacity = bridgeLiftingCapacity;
     }
 
     Course() {
@@ -19,23 +17,30 @@ class Course {
         return distance;
     }
 
-    public int getMaxObstacleHeight() {
-        return maxObstacleHeight;
-    }
-
-    public int getNumberOfObstacles() {
-        return numberOfObstacles;
+    public int getBridgeLiftingCapacity() {
+        return bridgeLiftingCapacity;
     }
 
     public void setDistance(int distance) {
         this.distance = distance;
     }
 
-    public void setMaxObstacleHeight(int maxObstacleHeight) {
-        this.maxObstacleHeight = maxObstacleHeight;
+    public void setBridgeLiftingCapacity(int bridgeLiftingCapacity) {
+        this.bridgeLiftingCapacity = bridgeLiftingCapacity;
     }
 
-    public void setNumberOfObstacles(int numberOfObstacles) {
-        this.numberOfObstacles = numberOfObstacles;
+    public void doIt(Team team) {
+        for (Participant participant : team.getParticipant()) {
+            if (participant.getCanRun() < this.distance || participant.getWeight() > this.bridgeLiftingCapacity) {
+                System.out.println("Participant " + participant.getName() + " did not ran the obstacle course");
+                team.setResults(false);
+            } else{
+                System.out.println("Participant " + participant.getName() + " ran the obstacle course");
+            }
+        }
+    }
+
+    boolean successfulResult(int participantCanRun, int participantWeight) {
+        return participantCanRun < this.distance || participantWeight > this.bridgeLiftingCapacity;
     }
 }

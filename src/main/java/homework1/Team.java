@@ -1,12 +1,12 @@
 package homework1;
 
 class Team {
-//    class Team implements ITeam {
 
     private static String nameTeam;
     private static int numberOfParticipants;
     private static int yearOfCreation;
     private static Participant[] participants;
+    private boolean results = true;
 
     Team(String nameTeam, int numberOfParticipants, int yearOfCreation, Participant[] participants) {
         this.nameTeam = nameTeam;
@@ -15,10 +15,6 @@ class Team {
         this.participants = participants;
     }
 
-//    public Team(String nameTeam) {
-//        this.nameTeam = nameTeam;
-//    }
-//
     Team() {}
 
     public static String getNameTeam() {
@@ -33,9 +29,7 @@ class Team {
         return yearOfCreation;
     }
 
-    public Participant[] getParticipant() {
-        return participants;
-    }
+    public Participant[] getParticipant() { return participants; }
 
     public void setNameTeam(String nameTeam) {
         if (nameTeam != null) { this.nameTeam = nameTeam; }
@@ -53,18 +47,15 @@ class Team {
         this.yearOfCreation = yearOfCreation;
     }
 
-//    @Override
-//    public String run(int distance, int q) {
-//        if (distance > numberOfParticipants) {
-//            return numberOfParticipants + " couldn't run " + distance;
-//        } else {
-//            return numberOfParticipants + " successfully ran " + distance;
-//        }
-//    }
+    public void setResults(boolean results) {
+        this.results = results;
+    }
 
-//    @Override
-//    public String run(int distance) {
-//        return name + (distance > limitRun ? " не " : " ") + "пробежал " + distance + " м";
-//    }
-
+    public void showResults() {
+        if (this.results == true) {
+            System.out.println("The whole \"" + this.nameTeam + "\" team ran to the finish line.");
+        } else {
+            System.out.println("Not all the \"" + this.nameTeam + "\" team ran to the finish line.");
+        }
+    }
 }
