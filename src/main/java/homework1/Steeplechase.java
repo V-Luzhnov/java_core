@@ -1,9 +1,17 @@
 package homework1;
-
+/**
+ * Java Core. Homework 1
+ *
+ * @author Vitalii Luzhnov
+ * @version 14.02.2022
+ */
 import homework1.enums.Sex;
 
 public class Steeplechase {
     public static void main(String[] args) {
+
+        final String Q_M = " m";
+        final String Q_KG = " kg";
 
         Course course = new Course();
         course.setDistance(5000);
@@ -12,7 +20,7 @@ public class Steeplechase {
 //        course.setBridgeLiftingCapacity(60);
 
         System.out.println();
-        System.out.println("Distance: " + course.getDistance() + " m | Bridge lifting capacity: " + course.getBridgeLiftingCapacity());
+        System.out.println("Distance: " + course.getDistance() + Q_M + " | Bridge lifting capacity: " + course.getBridgeLiftingCapacity() + Q_KG);
 
         Team team = new Team();
         team.setNameTeam("Rocket");

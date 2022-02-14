@@ -1,5 +1,10 @@
 package homework1;
-
+/**
+ * Java Core. Homework 1
+ *
+ * @author Vitalii Luzhnov
+ * @version 14.02.2022
+ */
 import homework1.enums.Sex;
 
 class Participant extends Team {
