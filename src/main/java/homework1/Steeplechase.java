@@ -45,7 +45,7 @@ public class Steeplechase {
 
         int numberParticipant= 1;
         for (Participant participant : team.getParticipant()) {
-            System.out.println("Participant " + numberParticipant + ": " + participant.toString());
+            System.out.println("Participant " + numberParticipant + ": " + participant);
             numberParticipant++;
         }
 
