@@ -1,12 +1,12 @@
 package homework1;
+
+import homework1.enums.Sex;
 /**
  * Java Core. Homework 1
  *
  * @author Vitalii Luzhnov
  * @version 14.02.2022
  */
-import homework1.enums.Sex;
-
 public class Steeplechase {
     public static void main(String[] args) {
 
