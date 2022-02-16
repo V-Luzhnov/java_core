@@ -5,7 +5,7 @@ package homework2;
  * @author Vitalii Luzhnov
  * @version 15.02.2022
  */
-public class HomeWork2  {
+public class HomeWork2 {
 
     public static void main(String[] args) {
         // Массив без ошибок.
