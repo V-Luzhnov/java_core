@@ -7,7 +7,7 @@ package homework2;
  */
 public class HomeWork2  {
 
-    public static void main(String[] args) throws MyArraySizeException, MyArrayDataException {
+    public static void main(String[] args) {
         // Массив без ошибок.
 //        String[][] arr = {{"00", "01", "02", "03"}, {"10", "11", "12", "13"}, {"20", "21", "22", "23"},  {"30", "31", "32", "33"}};
         // Массив другого размера (отсутствует адрес [0][3]).
