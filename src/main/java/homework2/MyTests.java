@@ -49,13 +49,21 @@ public class MyTests {
     }
 
     boolean conversionPossible(String str) {
-        String charactersToSearch = "0123456789";
-        for (int i = 0, n = str.length(); i < n; i++) {
-            int index = charactersToSearch.indexOf(str.charAt(i));
-            if (index == -1){
+        //version 1
+        byte[] buffer1 = str.getBytes();
+        for (int i = 0; i < buffer1.length; i++) {
+            if (buffer1[i] < 48 | buffer1[i] > 57) {
                 return false;
             }
         }
+        //version 2
+//        String charactersToSearch = "0123456789";
+//        for (int i = 0, n = str.length(); i < n; i++) {
+//            int index = charactersToSearch.indexOf(str.charAt(i));
+//            if (index == -1){
+//                return false;
+//            }
+//        }
         return true;
     }
 }
