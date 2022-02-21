@@ -27,7 +27,7 @@ public class UniqueWords {
     }
 
     static void variant_1() {
-        System.out.println("Вариант 2");
+        System.out.println("Вариант 1");
         System.out.println(words);
         System.out.println(new HashSet<>(words));
 
@@ -47,7 +47,7 @@ public class UniqueWords {
     }
 
     static void variant_2() {
-        System.out.println("Вариант 1");
+        System.out.println("Вариант 2");
         System.out.println(words);
         System.out.println(new HashSet<>(words));
 
