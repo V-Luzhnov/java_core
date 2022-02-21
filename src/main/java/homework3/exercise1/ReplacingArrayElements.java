@@ -16,19 +16,22 @@ public class ReplacingArrayElements {
 
     public static void main(String[] args) {
 
-        ReplaceElementClass replaceElementClass = new ReplaceElementClass();
-
-        printArr(replaceElementClass, arr1);
-        printArr(replaceElementClass, arr2);
+        printArr(arr1);
+        printArr(arr2);
 
     }
 
-    static void printArr(ReplaceElementClass replaceElementClass, Object[] arr) {
+    static void printArr(Object[] arr) {
+
+        ReplaceElementClass replaceElementClass = new ReplaceElementClass();
+
         System.out.println(Arrays.toString(arr));
+
         try {
             System.out.println(Arrays.toString(replaceElementClass.replaceElement(arr, index1, index2)));
         } catch (ArrayIndexOutOfBoundsException exception) {
             exception.printStackTrace();
         }
+
     }
 }
