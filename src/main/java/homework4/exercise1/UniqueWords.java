@@ -18,11 +18,11 @@ public class UniqueWords {
 
     public static void main(String[] args) {
 
-        variant_1(); //пожалуй, самый оптимальный вариант
+        variant_1(); //через HashMap - пожалуй, самый оптимальный вариант
 
         System.out.println();
 
-        variant_2(); //вполне рабочий, но почему-то по замерам времени получается в 5 дольше, чем variant_1
+        variant_2(); //через Collectors - вполне рабочий, но по замерам времени получается в 5 дольше, чем variant_1
 
     }
 
