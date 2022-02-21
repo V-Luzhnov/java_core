@@ -5,22 +5,30 @@ import java.util.Arrays;
  * Java Core. Homework 3.1
  *
  * @author Vitalii Luzhnov
- * @version 16.02.2022
+ * @version 21.02.2022
  */
 public class ReplacingArrayElements {
 
+    static Integer[] arr1 = {1, 2, 3, 4};
+    static String[] arr2 = {"1", "2", "3", "4"};
+    static int index1 = 2;
+    static int index2 = 3;
+
     public static void main(String[] args) {
-        int index1 = 2;
-        int index2 = 3;
-        Object[] arr = {1, 2, 3, 4};
-        System.out.println(Arrays.toString(arr));
-        replaceElement(arr, index1, index2);
-        System.out.println(Arrays.toString(arr));
+
+        ReplaceElementClass replaceElementClass = new ReplaceElementClass();
+
+        printArr(replaceElementClass, arr1);
+        printArr(replaceElementClass, arr2);
+
     }
 
-    static void replaceElement(Object[]arr, int index1, int index2) {
-        Object value = arr[index1];
-        arr[index1] = arr[index2];
-        arr[index2] = value;
+    static void printArr(ReplaceElementClass replaceElementClass, Object[] arr) {
+        System.out.println(Arrays.toString(arr));
+        try {
+            System.out.println(Arrays.toString(replaceElementClass.replaceElement(arr, index1, index2)));
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            exception.printStackTrace();
+        }
     }
 }
