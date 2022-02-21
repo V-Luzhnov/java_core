@@ -43,7 +43,7 @@ public class UniqueWords {
 
         System.out.println(map);
 
-        map.forEach((word, count) -> System.out.println(word + ": " + count));
+        map.forEach((word, value) -> System.out.println(word + ": " + value));
     }
 
     static void variant_2() {
@@ -59,6 +59,6 @@ public class UniqueWords {
 
         System.out.println(map);
 
-        map.forEach((K, V) -> System.out.println(K + ": " + V));
+        map.forEach((word, value) -> System.out.println(word + ": " + value));
     }
 }
