@@ -11,9 +11,9 @@ public class RunClass {
 
     public static void main(String[] args) {
 
-        Box box1 = addFruits(new Box<>(), new Apple(), 18);
-        Box box2 = addFruits(new Box<>(), new Orange(), 12);
-        Box box3 = addFruits(new Box<>(), new Orange(), 15);
+        Box<Fruit> box1 = addFruits(new Box<>(), new Apple(), 18);
+        Box<Fruit> box2 = addFruits(new Box<>(), new Orange(), 12);
+        Box<Fruit> box3 = addFruits(new Box<>(), new Orange(), 15);
 
         System.out.println(box1.getName() + Q_DASH + box1.getWeight());
         System.out.println(box2.getName() + Q_DASH + box2.getWeight());
@@ -32,7 +32,7 @@ public class RunClass {
 
     }
 
-    static Box addFruits(Box box, Fruit fruit, int numberOfFruit) {
+    static Box<Fruit> addFruits(Box<Fruit> box, Fruit fruit, int numberOfFruit) {
         for (int i = 1; i <= numberOfFruit; i++) {
             box.add(fruit);
         }
