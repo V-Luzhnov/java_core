@@ -18,8 +18,8 @@ public class Box<T extends Fruit> {
         this.fruitList = fruitList;
     }
 
-    //Переопределяем конструктор для new Box<>()
-    public Box(T... fruit) {
+    //Переопределяем конструктор для неограниенного числа входящих параметров
+    public Box(T...fruit) {
         //Разворачиваем массив в список
         this.fruitList = new ArrayList<>(Arrays.asList(fruit));
     }
