@@ -10,16 +10,10 @@ import java.util.Arrays;
  */
 public class Box<T extends Fruit> {
 
-    T[] fruitArray;
     ArrayList<T> fruitList;
 
-    public Box(T[] fruitArray, ArrayList<T> fruitList) {
-        this.fruitArray = fruitArray;
-        this.fruitList = fruitList;
-    }
-
-    //Переопределяем конструктор для неограниенного числа входящих параметров
-    public Box(T...fruit) {
+    @SafeVarargs //Varargs — это аргументы переменной длины
+    public Box(T... fruit) {
         //Разворачиваем массив в список
         this.fruitList = new ArrayList<>(Arrays.asList(fruit));
     }
