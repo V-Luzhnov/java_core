@@ -7,8 +7,8 @@ package homework3.exercise2;
  */
 public abstract class Fruit {
 
-    private String name;
-    private float weight;
+    private final String name;
+    private final float weight;
 
     public Fruit(String name, float weight) {
         this.name = name;
