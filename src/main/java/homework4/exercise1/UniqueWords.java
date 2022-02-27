@@ -33,17 +33,17 @@ public class UniqueWords {
 
 //        long startTime = System.currentTimeMillis();
 
-        Map<String, Integer> map = new HashMap<>();
+        HashMap<String, Integer> hashMap = new HashMap<>();
 
         for (String word : words) {
-            map.put(word, map.getOrDefault(word, 0) + 1);
+            hashMap.put(word, hashMap.getOrDefault(word, 0) + 1);
         }
 
 //        System.out.println("Variant 2 time: " + (System.currentTimeMillis() - startTime));
 
-        System.out.println(map);
+        System.out.println(hashMap);
 
-        map.forEach((word, value) -> System.out.println(word + ": " + value));
+        hashMap.forEach((word, value) -> System.out.println(word + ": " + value));
     }
 
     static void variant_2() {
