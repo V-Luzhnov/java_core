@@ -16,6 +16,6 @@ public class RunClass {
         phonebook.add("345678912","Fedorov");
         phonebook.add("123056789","Ivanov");
 
-        System.out.println(phonebook.getPhoneBySurname("Ivanov"));
+        System.out.println(phonebook.get("Ivanov"));
     }
 }

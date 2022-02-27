@@ -16,7 +16,7 @@ public class Phonebook {
         stringStringHashMap.put(phone, surname);
     }
 
-    public String getPhoneBySurname(String surname){
+    public String get(String surname){
         if(stringStringHashMap.containsValue(surname)){
             StringBuilder result = new StringBuilder(surname + " phone numbers: ");
             for(String key: stringStringHashMap.keySet()){
