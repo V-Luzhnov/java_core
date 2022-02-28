@@ -1,4 +1,4 @@
-package Experiments.Exp2.enums;
+package experiments.exp2.enums;
 
 public enum DataTypeArray {
 

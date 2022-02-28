@@ -1,4 +1,4 @@
-package Experiments.Exp2;
+package experiments.exp2;
 
 public class Exp2 {
     public static void main(String[] args) {
