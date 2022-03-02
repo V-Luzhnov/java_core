@@ -1,4 +1,4 @@
-package Experiments.Exp2;
+package experiments.exp2;
 
 public class CreateArray {
     public void createArray(String[] args) {

@@ -1,4 +1,4 @@
-package Experiments.Exp1;
+package experiments.exp1;
 
 import java.util.Arrays;
 

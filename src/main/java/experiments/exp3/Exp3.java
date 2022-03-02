@@ -1,4 +1,4 @@
-package Experiments.Exp3;
+package experiments.exp3;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
