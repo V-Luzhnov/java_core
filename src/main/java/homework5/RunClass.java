@@ -17,54 +17,32 @@ public class RunClass {
 
     static final String Q_NEW_LINE = "\n";
     static final String Q_SEMICOLON = ";";
-    public static ArrayList<FileClass> fileArrayList = new ArrayList<>();
+    public static ArrayList<RowClass<Serializable>> fileArrayList = new ArrayList<>();
     public static final String filePath = "src/main/java/homework5/file.csv";
-    public static final String title = "Value 1"+ Q_SEMICOLON + "Value 2" + Q_SEMICOLON + "Value 3" + Q_SEMICOLON + Q_NEW_LINE;
+    static final String Q_VALUE = "Value ";
 
     public static void main(String[] args) throws IOException {
-
-        createFile();
-        variant1();
-//        variant2();
-
-        AppData appData = readFile();
-
-        File file = new File(filePath);
-        System.out.println(file.getName());
-        System.out.println(Arrays.toString(appData.getHeader()));
-        for (int [] data : appData.getData()) {
-            System.out.println(Arrays.toString(data));
-        }
+        createRow(); //создаем строки данных для file.csv
+        writeFile(); //пишем данные в file.csv
+        AppData appData = readFile(); //читаем данные из file.csv и помещаем их в объект AppData
+        printAppData(appData); //выводим в консоль содержимое объекта AppData
+        changeHeaderAppData(appData); //меняем значения первой строки (header) в объекте AppData
+        printAppData(appData); //выводим в консоль содержимое объекта AppData
+        save(appData); //копируем данные из объекта AppData в file.csv (перезаписываем file.csv)
     }
 
-    public static void createFile(){
-
+    public static void createRow() {
+        fileArrayList.add(new RowClass<>(Q_VALUE + 1, Q_VALUE + 2, Q_VALUE + 3));
         Random random = new Random();
-        for(int i = 1; i <= 3; i++){
-            fileArrayList.add( new FileClass(random.nextInt(999), random.nextInt(999), random.nextInt(999)));
+        for (int i = 1; i <= 3; i++) {
+            fileArrayList.add(new RowClass<>(random.nextInt(999), random.nextInt(999), random.nextInt(999)));
         }
     }
 
-    public static void variant1() throws IOException {
-
-        try (FileWriter writer = new FileWriter(filePath)){
-            writer.write(title);
-            for(FileClass fIleCSV : fileArrayList) {
-                writer.write(fIleCSV.getValue_1() + Q_SEMICOLON + fIleCSV.getValue_2() + Q_SEMICOLON + fIleCSV.getValue_3() + Q_SEMICOLON + Q_NEW_LINE);
-            }
-        }
-    }
-
-    public static void variant2() throws IOException {
-
+    public static void writeFile() throws IOException {
         try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)){
-            //пишем первую строчку в файл
-            for(byte b : title.getBytes(StandardCharsets.UTF_8)){
-                fileOutputStream.write(b);
-            }
-            //пишем значения в остальные строки
-            for(FileClass fIleCSV : fileArrayList){
-                String raw = fIleCSV.getValue_1() + Q_SEMICOLON + fIleCSV.getValue_2() + Q_SEMICOLON + fIleCSV.getValue_3() + Q_SEMICOLON + Q_NEW_LINE;
+            for(RowClass<Serializable> row : fileArrayList){
+                String raw = row.getValue_1() + Q_SEMICOLON + row.getValue_2() + Q_SEMICOLON + row.getValue_3() + Q_SEMICOLON + Q_NEW_LINE;
                 for(byte b : raw.getBytes(StandardCharsets.UTF_8)){
                     fileOutputStream.write(b);
                 }
@@ -73,7 +51,6 @@ public class RunClass {
     }
 
     public static AppData readFile() throws IOException {
-
         AppData appData = new AppData();
         List<List<String>> fileLines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
@@ -86,13 +63,43 @@ public class RunClass {
 
         int[][] resultData = new int[fileLines.size()][3];
 
-        for(int i = 0; i < fileLines.size(); i++){
-            for(int j = 0; j < fileLines.get(i).size(); j++){
+        for (int i = 0; i < fileLines.size(); i++) {
+            for (int j = 0; j < fileLines.get(i).size(); j++) {
                 resultData[i][j] = Integer.parseInt(fileLines.get(i).get(j));
             }
         }
         appData.setData(resultData);
 
         return appData;
+    }
+
+    public static void printAppData(AppData appData) {
+        System.out.println(Arrays.toString(appData.getHeader()));
+        for (int[] data : appData.getData()) {
+            System.out.println(Arrays.toString(data));
+        }
+    }
+
+    public static void changeHeaderAppData(AppData appData) {
+        appData.setHeader(new String[]{Q_VALUE + 11 + Q_SEMICOLON + Q_VALUE + 22 + Q_SEMICOLON + Q_VALUE + 33});
+    }
+
+    public static void save(AppData data) throws IOException {
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
+
+            StringBuilder valveHeader = new StringBuilder();
+            for (String value : data.getHeader()) {
+                valveHeader.append(value).append(Q_SEMICOLON);
+            }
+            fileWriter.write(valveHeader + Q_NEW_LINE);
+
+            for (int[] row : data.getData()) {
+                StringBuilder valveData = new StringBuilder();
+                for (int value : row) {
+                    valveData.append(value).append(Q_SEMICOLON);
+                }
+                fileWriter.write(valveData + Q_NEW_LINE);
+            }
+        }
     }
 }
