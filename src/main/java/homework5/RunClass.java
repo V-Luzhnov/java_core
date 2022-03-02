@@ -30,7 +30,7 @@ public class RunClass {
         printAppData(appData); //выводим в консоль содержимое объекта AppData
         changeHeaderAppData(appData); //меняем значения первой строки (header) в объекте AppData
         printAppData(appData); //выводим в консоль содержимое объекта AppData
-        save(appData); //копируем данные из объекта AppData в file1.csv (перезаписываем file.csv через FileWriter)
+        save(appData); //копируем данные из объекта AppData в file1.csv (перезаписываем file1.csv через FileWriter)
     }
 
     public static void createRow() {
