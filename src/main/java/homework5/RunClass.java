@@ -1,5 +1,7 @@
 package homework5;
 
+import lesson5.dz.FIleObject;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -23,12 +25,13 @@ public class RunClass {
 
     public static void main(String[] args) throws IOException {
         createRow(); //создаем строки данных для file.csv
-        writeFile(); //пишем данные в file.csv
+        writeFileV1(); //пишем данные в file.csv через FileOutputStream
+//        writeFileV2(); //пишем данные в file.csv через FileWriter
         AppData appData = readFile(); //читаем данные из file.csv и помещаем их в объект AppData
         printAppData(appData); //выводим в консоль содержимое объекта AppData
         changeHeaderAppData(appData); //меняем значения первой строки (header) в объекте AppData
         printAppData(appData); //выводим в консоль содержимое объекта AppData
-        save(appData); //копируем данные из объекта AppData в file.csv (перезаписываем file.csv)
+        save(appData); //копируем данные из объекта AppData в file.csv (перезаписываем file.csv через FileWriter)
     }
 
     public static void createRow() {
@@ -39,13 +42,21 @@ public class RunClass {
         }
     }
 
-    public static void writeFile() throws IOException {
+    public static void writeFileV1() throws IOException {
         try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)){
             for(RowClass<Serializable> row : fileArrayList){
                 String raw = row.getValue_1() + Q_SEMICOLON + row.getValue_2() + Q_SEMICOLON + row.getValue_3() + Q_SEMICOLON + Q_NEW_LINE;
                 for(byte b : raw.getBytes(StandardCharsets.UTF_8)){
                     fileOutputStream.write(b);
                 }
+            }
+        }
+    }
+
+    public static void writeFileV2() throws IOException {
+        try (FileWriter writer = new FileWriter(filePath)){
+            for(RowClass<Serializable> row : fileArrayList) {
+                writer.write(row.getValue_1() + Q_SEMICOLON + row.getValue_2() + Q_SEMICOLON + row.getValue_3() + Q_SEMICOLON + Q_NEW_LINE);
             }
         }
     }
