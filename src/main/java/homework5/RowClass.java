@@ -1,11 +1,12 @@
 package homework5;
+
 /**
  * Java Core. Homework 5
  *
  * @author Vitalii Luzhnov
  * @version 27.02.2022
  */
-public class RowClass <T>{
+public class RowClass <T> {
 
     private final T value_1, value_2, value_3;
 

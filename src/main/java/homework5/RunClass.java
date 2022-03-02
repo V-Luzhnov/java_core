@@ -1,7 +1,5 @@
 package homework5;
 
-import lesson5.dz.FIleObject;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -20,18 +18,19 @@ public class RunClass {
     static final String Q_NEW_LINE = "\n";
     static final String Q_SEMICOLON = ";";
     public static ArrayList<RowClass<Serializable>> fileArrayList = new ArrayList<>();
-    public static final String filePath = "src/main/java/homework5/file.csv";
+    public static final String file1Path = "src/main/java/homework5/file1.csv";
+    public static final String file2Path = "src/main/java/homework5/file2.csv";
     static final String Q_VALUE = "Value ";
 
     public static void main(String[] args) throws IOException {
-        createRow(); //создаем строки данных для file.csv
-        writeFileV1(); //пишем данные в file.csv через FileOutputStream
-//        writeFileV2(); //пишем данные в file.csv через FileWriter
-        AppData appData = readFile(); //читаем данные из file.csv и помещаем их в объект AppData
+        createRow(); //создаем строки данных для *.csv
+        writeFile1(); //пишем данные в file1.csv через FileOutputStream
+        writeFile2(); //пишем данные в file2.csv через FileWriter
+        AppData appData = readFile(); //читаем данные из file1.csv и помещаем их в объект AppData
         printAppData(appData); //выводим в консоль содержимое объекта AppData
         changeHeaderAppData(appData); //меняем значения первой строки (header) в объекте AppData
         printAppData(appData); //выводим в консоль содержимое объекта AppData
-        save(appData); //копируем данные из объекта AppData в file.csv (перезаписываем file.csv через FileWriter)
+        save(appData); //копируем данные из объекта AppData в file1.csv (перезаписываем file.csv через FileWriter)
     }
 
     public static void createRow() {
@@ -42,9 +41,9 @@ public class RunClass {
         }
     }
 
-    public static void writeFileV1() throws IOException {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)){
-            for(RowClass<Serializable> row : fileArrayList){
+    public static void writeFile1() throws IOException {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file1Path)){
+            for(var row : fileArrayList){
                 String raw = row.getValue_1() + Q_SEMICOLON + row.getValue_2() + Q_SEMICOLON + row.getValue_3() + Q_SEMICOLON + Q_NEW_LINE;
                 for(byte b : raw.getBytes(StandardCharsets.UTF_8)){
                     fileOutputStream.write(b);
@@ -53,9 +52,9 @@ public class RunClass {
         }
     }
 
-    public static void writeFileV2() throws IOException {
-        try (FileWriter writer = new FileWriter(filePath)){
-            for(RowClass<Serializable> row : fileArrayList) {
+    public static void writeFile2() throws IOException {
+        try (FileWriter writer = new FileWriter(file2Path)){
+            for(var row : fileArrayList) {
                 writer.write(row.getValue_1() + Q_SEMICOLON + row.getValue_2() + Q_SEMICOLON + row.getValue_3() + Q_SEMICOLON + Q_NEW_LINE);
             }
         }
@@ -64,7 +63,7 @@ public class RunClass {
     public static AppData readFile() throws IOException {
         AppData appData = new AppData();
         List<List<String>> fileLines = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file1Path))) {
             String line = bufferedReader.readLine();
             appData.setHeader(line.split(Q_SEMICOLON));
             while ((line = bufferedReader.readLine()) != null) {
@@ -96,7 +95,7 @@ public class RunClass {
     }
 
     public static void save(AppData data) throws IOException {
-        try (FileWriter fileWriter = new FileWriter(filePath)) {
+        try (FileWriter fileWriter = new FileWriter(file1Path)) {
 
             StringBuilder valveHeader = new StringBuilder();
             for (String value : data.getHeader()) {
