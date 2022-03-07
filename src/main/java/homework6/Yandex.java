@@ -36,7 +36,7 @@ public class Yandex {
 
         System.out.println(url);
 
-        // При необходимости указать заголовки
+        // Указание заголовка
         Request requestHTTP = new Request.Builder()
                 .url(url)
                 .addHeader("X-Yandex-API-Key", prop.getProperty("API_KEY"))
