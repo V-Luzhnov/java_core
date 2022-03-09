@@ -1,4 +1,4 @@
-package homework7;
+package homework7.accuweather;
 
 import com.fasterxml.jackson.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.Map;
         "HasPrecipitation"
 })
 
-public class Day {
+public class Night {
 
     @JsonProperty("Icon")
     private Integer icon;

@@ -1,6 +1,8 @@
-package homework7;
+package homework7.accuweather;
 
 import com.fasterxml.jackson.annotation.*;
+import homework7.accuweather.Maximum;
+import homework7.accuweather.Minimum;
 
 import java.util.HashMap;
 import java.util.Map;

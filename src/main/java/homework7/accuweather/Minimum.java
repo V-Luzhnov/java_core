@@ -1,4 +1,4 @@
-package homework7;
+package homework7.accuweather;
 
 import com.fasterxml.jackson.annotation.*;
 

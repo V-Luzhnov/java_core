@@ -1,6 +1,7 @@
-package homework7;
+package homework7.accuweather;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import homework7.accuweather.Example;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
