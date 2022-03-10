@@ -10,12 +10,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringReader;
-import java.lang.reflect.Array;
 import java.util.Objects;
-import java.util.Properties;
 
 /**
  * Java Core. Homework 7
@@ -23,7 +20,7 @@ import java.util.Properties;
  * @author Vitalii Luzhnov
  * @version 10.03.2022
  */
-public class AccuWeatherProvider implements WeatherProvider {
+public class YandexWeatherProvider implements WeatherProvider {
 
     private static final String BASE_HOST = "api.weather.yandex.ru";
     private static final String API_VERSION = "v2";

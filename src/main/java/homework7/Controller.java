@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class Controller {
 
-    WeatherProvider weatherProvider = new AccuWeatherProvider();
+    WeatherProvider weatherProvider = new YandexWeatherProvider();
     Map<Integer, Functionality> variantResult = new HashMap();
 
     public Controller() {
