@@ -1,6 +1,5 @@
-package homework7.yandex;
+package homework7.weatherYandex;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -18,7 +17,7 @@ import java.util.Properties;
  * @author Vitalii Luzhnov
  * @version 09.03.2022
  */
-public class Yandex {
+public class RunClass {
 
     static Properties prop = new Properties();
 

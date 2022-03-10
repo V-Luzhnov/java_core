@@ -1,4 +1,4 @@
-package homework7.yandex;
+package homework7.weatherYandex;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
