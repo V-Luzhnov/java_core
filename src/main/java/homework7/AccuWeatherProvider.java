@@ -17,6 +17,12 @@ import java.lang.reflect.Array;
 import java.util.Objects;
 import java.util.Properties;
 
+/**
+ * Java Core. Homework 7
+ *
+ * @author Vitalii Luzhnov
+ * @version 10.03.2022
+ */
 public class AccuWeatherProvider implements WeatherProvider {
 
     private static final String BASE_HOST = "api.weather.yandex.ru";
@@ -63,7 +69,7 @@ public class AccuWeatherProvider implements WeatherProvider {
         }
 
         assert url != null;
-        // Указание заголовка
+
         Request request = new Request.Builder()
                 .url(url)
                 .addHeader("X-Yandex-API-Key", API_KEY)
@@ -111,6 +117,8 @@ public class AccuWeatherProvider implements WeatherProvider {
         String selectedCity = ApplicationGlobalState.getInstance().getSelectedCity();
         String apiKeyForCity = ApplicationGlobalState.getInstance().getApiKeyForCity();
 
+        System.out.println("Поиск города " + selectedCity + "...");
+
         HttpUrl detectLocationURL = new HttpUrl.Builder()
                 .scheme("https")
                 .host("open.mapquestapi.com")
@@ -121,7 +129,6 @@ public class AccuWeatherProvider implements WeatherProvider {
                 .addQueryParameter("location", selectedCity)
                 .build();
 
-        // Указание заголовка
         Request request = new Request.Builder()
                 .url(detectLocationURL)
                 .build();
@@ -130,33 +137,24 @@ public class AccuWeatherProvider implements WeatherProvider {
 
         if (!response.isSuccessful()) {
             throw new IOException("Невозможно прочесть информацию о городе. " +
-                "Код ответа сервера = " + response.code() + " тело ответа = " + Objects.requireNonNull(response.body()).string());
+                    "Код ответа сервера = " + response.code() + " тело ответа = " + Objects.requireNonNull(response.body()).string());
         }
+
         String jsonResponse = Objects.requireNonNull(response.body()).string();
-//        System.out.println(jsonResponse);
-        System.out.println("Поиск города " + selectedCity + "...");
 
         if (objectMapper.readTree(jsonResponse).size() == 0) {
             throw new IOException("Server returns 0 cities");
         }
 
-//        if (objectMapper.readTree(jsonResponse).size() > 0) {
-//            for (JsonNode res : objectMapper.readTree(jsonResponse).at("/results")) {
-//                for (JsonNode loc : res.at("/locations")) {
-//                    System.out.println("/adminArea5: " + loc.at("/adminArea5").asText());
-//                    System.out.println("/adminArea3: " + loc.at("/adminArea3").asText());
-//                    System.out.println("selectedCity: " + selectedCity);
-//                    System.out.println();
-//                    if ((Objects.equals(loc.at("/adminArea5").asText(), selectedCity)) & (Objects.equals(loc.at("/adminArea3").asText(), selectedCity))) {
-//                        String cityName = objectMapper.readTree(jsonResponse).at("/results/0/providedLocation/location").asText();
-//                        String lat = objectMapper.readTree(jsonResponse).at("/results/0/locations/0/latLng/lat").asText();
-//                        String lon = objectMapper.readTree(jsonResponse).at("/results/0/locations/0/latLng/lng").asText();
-//                        System.out.println("Найден город " + cityName + " на широте " + lat + " и долготе " + lon);
-//                    }
-//                }
-//            }
-//        } else throw new IOException("Server returns 0 cities");
+        for (JsonNode res : objectMapper.readTree(jsonResponse).at("/results")) {
+            for (JsonNode loc : res.at("/locations")) {
+                String lat = loc.at("/latLng/lat").asText();
+                String lon = loc.at("/latLng/lng").asText();
+                System.out.println("Город " + selectedCity + " найден на широте " + lat + " и долготе " + lon);
+                return new String[]{lat, lon};
+            }
+        }
 
-        return new String[]{objectMapper.readTree(jsonResponse).at("/results/0/locations/0/latLng/lat").asText(), objectMapper.readTree(jsonResponse).at("/results/0/locations/0/latLng/lng").asText()};
+        throw new IOException("Server returns 0 cities");
     }
 }

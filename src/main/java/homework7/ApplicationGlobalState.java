@@ -2,6 +2,12 @@ package homework7;
 
 import java.util.Properties;
 
+/**
+ * Java Core. Homework 7
+ *
+ * @author Vitalii Luzhnov
+ * @version 10.03.2022
+ */
 public final class ApplicationGlobalState {
 
     private static ApplicationGlobalState INSTANCE;
@@ -24,6 +30,7 @@ public final class ApplicationGlobalState {
     public String getSelectedCity() {
         return selectedCity;
     }
+
     public void setSelectedCity(String selectedCity) {
         this.selectedCity = selectedCity;
     }

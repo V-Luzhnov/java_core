@@ -3,6 +3,12 @@ package homework7;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Java Core. Homework 7
+ *
+ * @author Vitalii Luzhnov
+ * @version 10.03.2022
+ */
 public class UserInterface {
 
     private final Controller controller = new Controller();
@@ -10,14 +16,12 @@ public class UserInterface {
     public void runApplication() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.print("Введите название города на английском языке: ");
+            System.out.print("Введите название города на английском языке (exit - завершить работу): ");
             String city = scanner.nextLine();
 
             setGlobalCity(city);
 
-            System.out.println("Введите ответ: 1 - Получить текущую погоду, " +
-                "2 - Получить погоду на следующие 5 дней, " +
-                    "выход (exit) - завершить работу");
+            System.out.print("1 - Получить текущую погоду, 2 - Получить погоду на ближайшие 5 дней, exit - завершить работу. Введите ответ: ");
             String result = scanner.nextLine();
 
             checkIsExit(result);
@@ -39,14 +43,18 @@ public class UserInterface {
     }
 
     private void checkIsExit(String result) {
-        if (result.toLowerCase().equals("выход") || result.toLowerCase().equals("exit")) {
+        if (result.toLowerCase().equals("exit")) {
             System.out.println("Завершаю работу");
             System.exit(0);
         }
     }
 
-    private void setGlobalCity(String city) {
-        ApplicationGlobalState.getInstance().setSelectedCity(city);
+    private void setGlobalCity(String result) {
+        if (result.toLowerCase().equals("exit")) {
+            System.out.println("Завершаю работу");
+            System.exit(0);
+        }
+        ApplicationGlobalState.getInstance().setSelectedCity(result);
     }
 
 

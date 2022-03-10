@@ -7,6 +7,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Java Core. Homework 7
+ *
+ * @author Vitalii Luzhnov
+ * @version 10.03.2022
+ */
 public class Controller {
 
     WeatherProvider weatherProvider = new AccuWeatherProvider();
@@ -40,8 +46,4 @@ public class Controller {
     public void getWeatherIn5Days() throws IOException {
         weatherProvider.getWeather(Periods.FIVE_DAYS);
     }
-
-//    public void getWeatherIn5Days() {
-//        throw new RuntimeException("Implement in h/w");
-//    }
 }
