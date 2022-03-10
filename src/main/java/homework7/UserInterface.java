@@ -43,14 +43,14 @@ public class UserInterface {
     }
 
     private void checkIsExit(String result) {
-        if (result.toLowerCase().equals("exit")) {
+        if (result.equalsIgnoreCase("exit")) {
             System.out.println("Завершаю работу");
             System.exit(0);
         }
     }
 
     private void setGlobalCity(String result) {
-        if (result.toLowerCase().equals("exit")) {
+        if (result.equalsIgnoreCase("exit")) {
             System.out.println("Завершаю работу");
             System.exit(0);
         }
