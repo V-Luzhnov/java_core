@@ -19,21 +19,14 @@ import java.util.Properties;
 
 public class AccuWeatherProvider implements WeatherProvider {
 
-    static Properties prop = new Properties();
-
     private static final String BASE_HOST = "api.weather.yandex.ru";
     private static final String API_VERSION = "v2";
     private static final String FORECAST = "forecast";
     private static final String LANG = "ru_RU";
     private static final String API_KEY = ApplicationGlobalState.getInstance().getApiKey();
 
-//    private final OkHttpClient client = new OkHttpClient();
-//    private final ObjectMapper objectMapper = new ObjectMapper();
-
-
     public void getWeather(Periods periods) throws IOException {
 
-        loadProperties();
         OkHttpClient client = new OkHttpClient();
         ObjectMapper mapper = new ObjectMapper();
 
@@ -165,11 +158,5 @@ public class AccuWeatherProvider implements WeatherProvider {
 //        } else throw new IOException("Server returns 0 cities");
 
         return new String[]{objectMapper.readTree(jsonResponse).at("/results/0/locations/0/latLng/lat").asText(), objectMapper.readTree(jsonResponse).at("/results/0/locations/0/latLng/lng").asText()};
-    }
-
-    private static void loadProperties() throws IOException {
-        try(FileInputStream configFile = new FileInputStream("src/main/resources/yandex.properties")){
-            prop.load(configFile);
-        }
     }
 }
