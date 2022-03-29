@@ -1,7 +1,6 @@
 package homework8;
 
 import homework8.entity.WeatherData;
-import homework8.enums.Periods;
 
 import java.io.IOException;
 
@@ -15,9 +14,10 @@ import java.util.List;
  * @author Vitalii Luzhnov
  * @version 29.03.2022
  */
-public interface WeatherProvider {
+// Репозиторий для работы
+public interface DatabaseRepository {
 
-    void getWeather(Periods periods) throws IOException, SQLException;
+    boolean saveWeatherData(WeatherData weatherData) throws SQLException;
 
-    List<WeatherData> getAllFromDb() throws IOException, SQLException;
+    List<WeatherData> getAllSavedData() throws IOException, SQLException;
 }

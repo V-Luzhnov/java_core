@@ -2,6 +2,7 @@ package homework8;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+
 import java.util.Properties;
 
 /**
@@ -25,6 +26,10 @@ public final class ApplicationGlobalState {
         }
 
         return INSTANCE;
+    }
+
+    public String getDbFileName() {
+        return "application.db";
     }
 
     public String getSelectedCity() {

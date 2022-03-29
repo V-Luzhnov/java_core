@@ -67,7 +67,7 @@ public class Day {
     private String daytime;
     private boolean polar;
     private Long fresh_snowMm;
-    private Long temp;
+    private double temp;
 
     @JsonProperty("_source")
     public String getSource() { return source; }
@@ -149,7 +149,7 @@ public class Day {
     public Long getFresh_snow_mm() { return fresh_snowMm; }
     public void setFresh_snow_mm(Long value) { this.fresh_snowMm = value; }
 
-    public Long getTemp() { return temp; }
-    public void setTemp(Long value) { this.temp = value; }
+    public double getTemp() { return temp; }
+    public void setTemp(double value) { this.temp = value; }
 
 }
