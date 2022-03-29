@@ -69,7 +69,7 @@ public class YandexWeatherProvider implements WeatherProvider {
                 .at("/geo_object/locality/name")
                 .asText();
 
-        for (Forecast forecast : weatherResponse.getForecasts()) {
+         for (Forecast forecast : weatherResponse.getForecasts()) {
             String valveRes = "В городе " +
                     city +
                     (periods.equals(Periods.NOW) ? " сегодня (" : " на дату ") +
