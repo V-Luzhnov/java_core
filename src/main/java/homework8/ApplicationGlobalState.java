@@ -15,6 +15,7 @@ public final class ApplicationGlobalState {
 
     private static ApplicationGlobalState INSTANCE;
     private String selectedCity = null;
+    private String selectedDate = null;
 
     private ApplicationGlobalState() {
     }
@@ -38,6 +39,14 @@ public final class ApplicationGlobalState {
 
     public void setSelectedCity(String selectedCity) {
         this.selectedCity = selectedCity;
+    }
+
+    public String getSelectedDate() {
+        return selectedDate;
+    }
+
+    public void setSelectedDate(String selectedDate) {
+        this.selectedDate = selectedDate;
     }
 
     public String getApiKey() {

@@ -11,12 +11,12 @@ public class WeatherData {
     private String city;
     private String localDate;
     private String text;
-    private double temperature;
+    private Long temperature;
 
     public WeatherData() {
     }
 
-    public WeatherData(String city, String localDate, String text, double temperature) {
+    public WeatherData(String city, String localDate, String text, Long temperature) {
         this.city = city;
         this.localDate = localDate;
         this.text = text;
@@ -47,11 +47,11 @@ public class WeatherData {
         this.text = text;
     }
 
-    public Double getTemperature() {
+    public Long getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(Double temperature) {
+    public void setTemperature(Long temperature) {
         this.temperature = temperature;
     }
 }

@@ -1,10 +1,8 @@
 package homework8;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import homework8.WeatherProvider;
 import homework8.enums.Periods;
 import homework8.weatherYandex.Forecast;
 import homework8.weatherYandex.WeatherResponse;
@@ -19,10 +17,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringReader;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import java.util.Objects;
 import java.util.Properties;
@@ -50,11 +45,12 @@ public class YandexWeatherProvider implements WeatherProvider {
 
         loadProperties();
 
-        String[] valLatLon = detectLatLon();
-        String latValue = valLatLon[0];
-        String lonValue = valLatLon[1];
-
         if (periods.equals(Periods.NOW) || periods.equals(Periods.FIVE_DAYS)) {
+
+            String[] valLatLon = detectLatLon();
+            String latValue = valLatLon[0];
+            String lonValue = valLatLon[1];
+
             HttpUrl url;
             url = new HttpUrl.Builder()
                     .scheme(prop.getProperty("SCHEME"))
@@ -107,23 +103,53 @@ public class YandexWeatherProvider implements WeatherProvider {
             }
         }
 
+        if (periods.equals(Periods.BASE_DATE)) {
+            getDataFromDbTillDate();
+        }
+
         if (periods.equals(Periods.BASE)) {
             getAllFromDb();
+        }
+
+        if (periods.equals(Periods.CLEAR)) {
+            databaseRepositorySQLite.performDropTable();
+            System.out.println("База данных очещена");
         }
 
         if (periods.equals(Periods.CLOSE)) {
             databaseRepositorySQLite.closeConnection();
         }
-
     }
 
     @Override
     public List<WeatherData> getAllFromDb() throws SQLException {
         List<WeatherData> weatherDataList = databaseRepositorySQLite.getAllSavedData();
-        for (WeatherData weatherData : weatherDataList) {
-            System.out.println(weatherData.getCity() + weatherData.getLocalDate() + weatherData.getText() + weatherData.getTemperature());
-        }
+        printlnResult(weatherDataList);
         return weatherDataList;
+    }
+
+    public void getDataFromDbTillDate() throws SQLException {
+        String selectedDate = ApplicationGlobalState.getInstance().getSelectedDate();
+        List<WeatherData> weatherDataList = databaseRepositorySQLite.getDataTillDate(selectedDate);
+        printlnResult(weatherDataList);
+    }
+
+    public void printlnResult(List<WeatherData> weatherDataList) {
+        if (weatherDataList.size() == 0){
+            System.out.println("Данные отсутствуют в базе");
+        }else {
+            for (WeatherData weatherData : weatherDataList) {
+                String valveRes = "В городе " +
+                        weatherData.getCity() +
+                        " на дату " +
+                        weatherData.getLocalDate() +
+                        " ожидается " +
+                        weatherData.getText() +
+                        ", температура " +
+                        weatherData.getTemperature();
+                System.out.println(valveRes);
+            }
+        }
     }
 
     public String[] detectLatLon() throws IOException {

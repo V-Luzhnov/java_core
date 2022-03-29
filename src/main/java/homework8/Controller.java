@@ -24,8 +24,10 @@ public class Controller {
     public Controller() {
         variantResult.put(1, Functionality.GET_CURRENT_WEATHER);
         variantResult.put(2, Functionality.GET_WEATHER_IN_NEXT_5_DAYS);
-        variantResult.put(3, Functionality.GET_DATA_BASE);
-        variantResult.put(4, Functionality.EXIT);
+        variantResult.put(3, Functionality.GET_DATA_BASE_DATE);
+        variantResult.put(4, Functionality.GET_DATA_BASE);
+        variantResult.put(5, Functionality.GET_CLEAR_BASE);
+        variantResult.put(6, Functionality.EXIT);
     }
 
     public void onUserInput(String input) throws IOException, SQLException {
@@ -41,8 +43,14 @@ public class Controller {
             case GET_WEATHER_IN_NEXT_5_DAYS:
                 getWeatherIn5Days();
                 break;
+            case GET_DATA_BASE_DATE:
+                getWeatherFromDBTillDate();
+                break;
             case GET_DATA_BASE:
                 getWeatherFromDB();
+                break;
+            case GET_CLEAR_BASE:
+                getClearDB();
                 break;
             case EXIT:
                 getExit();
@@ -58,11 +66,19 @@ public class Controller {
         weatherProvider.getWeather(Periods.FIVE_DAYS);
     }
 
+    public void getWeatherFromDBTillDate() throws IOException, SQLException {
+        weatherProvider.getWeather(Periods.BASE_DATE);
+    }
+
     public void getWeatherFromDB() throws IOException, SQLException {
         weatherProvider.getWeather(Periods.BASE);
     }
 
     public void getExit() throws IOException, SQLException {
         weatherProvider.getWeather(Periods.CLOSE);
+    }
+
+    public void getClearDB() throws IOException, SQLException {
+        weatherProvider.getWeather(Periods.CLEAR);
     }
 }

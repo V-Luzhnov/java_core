@@ -9,6 +9,8 @@ package homework8.enums;
 public enum Periods {
     NOW,
     FIVE_DAYS,
+    BASE_DATE,
     BASE,
+    CLEAR,
     CLOSE
 }
