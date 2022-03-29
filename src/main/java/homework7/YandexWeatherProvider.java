@@ -10,9 +10,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Objects;
+import java.util.Properties;
 
 /**
  * Java Core. Homework 7
@@ -22,13 +24,13 @@ import java.util.Objects;
  */
 public class YandexWeatherProvider implements WeatherProvider {
 
-    private static final String BASE_HOST = "api.weather.yandex.ru";
-    private static final String API_VERSION = "v2";
-    private static final String FORECAST = "forecast";
-    private static final String LANG = "ru_RU";
+    static Properties prop = new Properties();
+
     private static final String API_KEY = ApplicationGlobalState.getInstance().getApiKey();
 
     public void getWeather(Periods periods) throws IOException {
+
+        loadProperties();
 
         OkHttpClient client = new OkHttpClient();
         ObjectMapper mapper = new ObjectMapper();
@@ -37,35 +39,18 @@ public class YandexWeatherProvider implements WeatherProvider {
         String latValue = valLatLon[0];
         String lonValue = valLatLon[1];
 
-        HttpUrl url = null;
+        HttpUrl url;
 
-        if (periods.equals(Periods.NOW)) {
-            url = new HttpUrl.Builder()
-                    .scheme("https")
-                    .host(BASE_HOST)
-                    .addPathSegment(API_VERSION)
-                    .addPathSegment(FORECAST)
-                    .addQueryParameter("lat", latValue)
-                    .addQueryParameter("lon", lonValue)
-                    .addQueryParameter("lang", LANG)
-                    .addQueryParameter("limit", "1")
-                    .build();
-        }
-
-        if (periods.equals(Periods.FIVE_DAYS)) {
-            url = new HttpUrl.Builder()
-                    .scheme("https")
-                    .host(BASE_HOST)
-                    .addPathSegment(API_VERSION)
-                    .addPathSegment(FORECAST)
-                    .addQueryParameter("lat", latValue)
-                    .addQueryParameter("lon", lonValue)
-                    .addQueryParameter("lang", LANG)
-                    .addQueryParameter("limit", "5")
-                    .build();
-        }
-
-        assert url != null;
+        url = new HttpUrl.Builder()
+                .scheme(prop.getProperty("SCHEME"))
+                .host(prop.getProperty("BASE_HOST"))
+                .addPathSegment(prop.getProperty("API_VERSION"))
+                .addPathSegment(prop.getProperty("FORECAST"))
+                .addQueryParameter("lat", latValue)
+                .addQueryParameter("lon", lonValue)
+                .addQueryParameter("lang", prop.getProperty("LANG"))
+                .addQueryParameter("limit", periods.equals(Periods.NOW)?"1":prop.getProperty("LIMIT"))
+                .build();
 
         Request request = new Request.Builder()
                 .url(url)
@@ -84,25 +69,16 @@ public class YandexWeatherProvider implements WeatherProvider {
                 .at("/geo_object/locality/name")
                 .asText();
 
-        for (Forecast forecast : weatherResponse.getForecasts()) {
-            if (periods.equals(Periods.NOW)) {
-                System.out.println(
-                        "В городе " + city +
-//                        "В городе " + ApplicationGlobalState.getInstance().getSelectedCity() +
-                        " сегодня (" + forecast.getDate() +
-                        ") " + forecast.getParts().getDay_short().getCondition() +
-                        ", температура " + forecast.getParts().getDay_short().getTemp()
-                );
-            }
-            if (periods.equals(Periods.FIVE_DAYS)) {
-                System.out.println(
-                    "В городе " + city +
-//                    "В городе " + ApplicationGlobalState.getInstance().getSelectedCity() +
-                    " на дату " + forecast.getDate() +
-                   " ожидается " + forecast.getParts().getDay_short().getCondition() +
-                   ", температура " + forecast.getParts().getDay_short().getTemp()
-                );
-            }
+         for (Forecast forecast : weatherResponse.getForecasts()) {
+            String valveRes = "В городе " +
+                    city +
+                    (periods.equals(Periods.NOW) ? " сегодня (" : " на дату ") +
+                    forecast.getDate() +
+                    (periods.equals(Periods.NOW) ? ") " : " ожидается ") +
+                    forecast.getParts().getDay_short().getCondition() +
+                    ", температура " +
+                    forecast.getParts().getDay_short().getTemp();
+            System.out.println(valveRes);
         }
     }
 
@@ -153,5 +129,11 @@ public class YandexWeatherProvider implements WeatherProvider {
         }
 
         throw new IOException("Server returns 0 cities");
+    }
+
+    private static void loadProperties() throws IOException {
+        try(FileInputStream configFile = new FileInputStream("src/main/resources/weatherYandex.properties")){
+            prop.load(configFile);
+        }
     }
 }
